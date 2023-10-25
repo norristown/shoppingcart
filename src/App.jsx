@@ -1,31 +1,33 @@
 import { useState, useEffect } from "react";
-import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Store from "./pages/Store";
+import Cart from "./pages/Cart";
+import Homepage from "./pages/Homepage";
+import PageNotFound from "./pages/PageNotFound";
 
 function App() {
-  const [storeItems, setStoreItems] = useState([
-    {
-      title: "",
-      category: "",
-      description: "",
-      id: "",
-      image: "",
-      price: "",
-      rating: { rating: "", count: "" },
-    },
-  ]);
+  // const [storeItems, setStoreItems] = useState([]);
 
-  useEffect(() => {
-    async function getProducts() {
-      const url = await fetch("https://fakestoreapi.com/products");
-      const data = await url.json();
-      setStoreItems(data);
-    }
-    getProducts();
-  });
+  // useEffect(() => {
+  //   async function getProducts() {
+  //     const url = await fetch("https://fakestoreapi.com/products");
+  //     const data = await url.json();
+  //     console.log(data);
+  //     setStoreItems(data);
+  //   }
+  //   getProducts();
+  // }, []);
   return (
-    <>
-      <p>Hello</p>
-    </>
+    
+
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="store" element={<Store />} />
+        <Route path="cart" element={<Cart />} />
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
