@@ -3,22 +3,29 @@ import { useState, useEffect } from "react";
 export default function ProductWrapper() {
   const [storeItems, setStoreItems] = useState([]);
 
-  const [cartItems, setCartItems] = useState({
-    id: "",
-    quantity: 0,
-    price: "",
-  });
+  const [cartItems, setCartItems] = useState([
+    {
+      id: "",
+      quantity: 0,
+      price: "",
+    },
+  ]);
   function handleAddToCart(id) {
     storeItems.map((item) => {
       if (item.id === id) {
-        setCartItems((prev) => {
-          return { ...prev, item };
-        });
-        console.log(cartItems);
+        setCartItems((prev) => [
+          ...prev,
+          {
+            id: item.id,
+            quantity: 1,
+            price: item.price,
+          },
+        ]);
       }
 
       return id;
     });
+    console.log(cartItems);
   }
 
   useEffect(() => {
