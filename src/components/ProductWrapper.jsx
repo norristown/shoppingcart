@@ -2,30 +2,58 @@ import { useState, useEffect } from "react";
 
 export default function ProductWrapper() {
   const [storeItems, setStoreItems] = useState([]);
-
   const [cartItems, setCartItems] = useState([
-    {
-      id: "",
-      quantity: 0,
-      price: "",
-    },
+    // {
+    //   id: "",
+    //   quantity: 0,
+    //   price: "",
+    // },
   ]);
+  // function handleAddToCart(id) {
+  //   storeItems.map((item) => {
+  //     if (item.id !== id) {
+  //       setCartItems((prev) => [
+  //         ...prev,
+  //         {
+  //           id: item.id,
+  //           quantity: 1,
+  //           price: item.price,
+  //         },
+  //       ]);
+  //     } else {
+  //       setCartItems((prev) => [...prev, {}]);
+  //     }
+  //   });
+  //   console.log(cartItems);
+  // }
+
   function handleAddToCart(id) {
-    storeItems.map((item) => {
-      if (item.id === id) {
+    const itemToAdd = storeItems.find((item) => item.id === id);
+
+    if (itemToAdd) {
+      const isInCart = cartItems.find((item) => item.id === id);
+
+      if (isInCart) {
+        setCartItems((prev) =>
+          prev.map(
+            (cartItem) =>
+              cartItem.id === id && {
+                ...cartItem,
+                quantity: cartItem.quantity + 1,
+              }
+          )
+        );
+      } else {
         setCartItems((prev) => [
           ...prev,
           {
-            id: item.id,
+            id: itemToAdd.id,
             quantity: 1,
-            price: item.price,
+            price: itemToAdd.price,
           },
         ]);
       }
-
-      return id;
-    });
-    console.log(cartItems);
+    }
   }
 
   useEffect(() => {
@@ -36,7 +64,13 @@ export default function ProductWrapper() {
       setStoreItems(data);
     }
     getProducts();
-  }, []);
+    console.log(cartItems);
+    const total = cartItems.reduce(
+      (acc, curr) => acc + curr.price * curr.quantity,
+      0
+    );
+    console.log(total);
+  }, [cartItems]);
 
   return (
     <div
