@@ -35,12 +35,13 @@ export default function ProductWrapper() {
 
       if (isInCart) {
         setCartItems((prev) =>
-          prev.map(
-            (cartItem) =>
-              cartItem.id === id && {
-                ...cartItem,
-                quantity: cartItem.quantity + 1,
-              }
+          prev.map((cartItem) =>
+            cartItem.id === id
+              ? {
+                  ...cartItem,
+                  quantity: cartItem.quantity + 1,
+                }
+              : cartItem
           )
         );
       } else {
