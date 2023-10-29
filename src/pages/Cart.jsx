@@ -12,10 +12,15 @@ function Cart({cartItems, onSetCartItems}) {
   function handleAddCartItem(id) {
     onSetCartItems(prev => prev.map(item => item.id === id ? { ...item, quantity: item.quantity + 1 } : item))
   }
+  const total = cartItems.reduce(
+    (acc, curr) => acc + curr.price * curr.quantity,
+    0
+  );
   return (
     <div>
       <PageNav />
       <h1>Cart</h1>
+      <h2>Total: {total}</h2>
       {cartItems.length === 0 ? <div>Your Cart Is Empty</div> : 
         <div  style={{
           display: "grid",
