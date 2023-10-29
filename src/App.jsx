@@ -6,12 +6,13 @@ import Homepage from "./pages/Homepage";
 import PageNotFound from "./pages/PageNotFound";
 
 function App() {
+  const [cartItems, setCartItems] = useState([]);
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Homepage />} />
-        <Route path="store" element={<Store />} />
-        <Route path="cart" element={<Cart />} />
+        <Route path="store" element={<Store cartItems={cartItems} onSetCartItems={setCartItems} />} />
+        <Route path="cart" element={<Cart cartItems={cartItems} onSetCartItems={setCartItems} />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
