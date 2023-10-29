@@ -4,11 +4,13 @@ function Cart({cartItems, onSetCartItems}) {
   function handleRemoveCartItem(id) {
 
     onSetCartItems(prev => prev.map(item => item.id === id ? 
-      { ...item, quantity: item.quantity - 1 } : 
-      item ))
+      { ...item, quantity: item.quantity - 1 } : item ))
 
     onSetCartItems(prev => prev.filter(item => item.quantity !== 0))
 
+  }
+  function handleAddCartItem(id) {
+    onSetCartItems(prev => prev.map(item => item.id === id ? { ...item, quantity: item.quantity + 1 } : item))
   }
   return (
     <div>
@@ -51,7 +53,7 @@ function Cart({cartItems, onSetCartItems}) {
               <div>
                 <button onClick={() => handleRemoveCartItem(x.id)}>-</button>
                 <span></span>
-                <button>+</button>
+                <button onClick={() => handleAddCartItem(x.id)}>+</button>
               </div>
              
             </div>

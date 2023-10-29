@@ -2,24 +2,6 @@ import { useState, useEffect } from "react";
 
 export default function ProductWrapper({cartItems, onSetCartItems}) {
   const [storeItems, setStoreItems] = useState([]);
-  // const [cartItems, setCartItems] = useState([]);
-  // function handleAddToCart(id) {
-  //   storeItems.map((item) => {
-  //     if (item.id !== id) {
-  //       setCartItems((prev) => [
-  //         ...prev,
-  //         {
-  //           id: item.id,
-  //           quantity: 1,
-  //           price: item.price,
-  //         },
-  //       ]);
-  //     } else {
-  //       setCartItems((prev) => [...prev, {}]);
-  //     }
-  //   });
-  //   console.log(cartItems);
-  // }
 
   function handleAddToCart(id) {
     const itemToAdd = storeItems.find((item) => item.id === id);
@@ -52,14 +34,6 @@ export default function ProductWrapper({cartItems, onSetCartItems}) {
       }
     }
   }
-
-  // function handleRemoveFromCart(id) {
-  //   const itemToRemove = storeItems.find(item => item.id === id);
-
-  //   if (itemToRemove) {
-  //     onSetCartItems(prev => prev.map(item => item.id === id ? {...item, quantity: item.quantity - 1 } : item ))
-  //   } 
-  // }
 
   useEffect(() => {
     async function getProducts() {
