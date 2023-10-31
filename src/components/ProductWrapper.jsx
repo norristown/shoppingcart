@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function ProductWrapper({cartItems, onSetCartItems}) {
+export default function ProductWrapper({ cartItems, onSetCartItems }) {
   const [storeItems, setStoreItems] = useState([]);
 
   function handleAddToCart(id) {
@@ -39,16 +39,9 @@ export default function ProductWrapper({cartItems, onSetCartItems}) {
     async function getProducts() {
       const url = await fetch("https://fakestoreapi.com/products");
       const data = await url.json();
-      console.log(data);
       setStoreItems(data);
     }
     getProducts();
-    console.log(cartItems);
-    const total = cartItems.reduce(
-      (acc, curr) => acc + curr.price * curr.quantity,
-      0
-    );
-    console.log(total);
   }, [cartItems]);
 
   return (

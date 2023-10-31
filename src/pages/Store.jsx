@@ -1,11 +1,10 @@
 import PageNav from "../components/PageNav";
 import ProductWrapper from "../components/ProductWrapper";
 
-function Store({cartItems, onSetCartItems}) {
-  
+function Store({ cartItems, onSetCartItems, totalItems }) {
   return (
     <div>
-      <PageNav />
+      <PageNav totalItems={totalItems} />
       <h1>Store</h1>
       <ProductWrapper cartItems={cartItems} onSetCartItems={onSetCartItems} />
     </div>

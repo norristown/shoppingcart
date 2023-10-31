@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import styles from "./PageNav.module.css";
 
-function PageNav() {
+function PageNav({ totalItems }) {
   return (
     <div className={styles.nav}>
       <ul>
@@ -12,7 +12,7 @@ function PageNav() {
           <NavLink to="/store">Store</NavLink>
         </li>
         <li>
-          <NavLink to="/cart">Cart</NavLink>
+          <NavLink to="/cart">Cart ({totalItems})</NavLink>
         </li>
       </ul>
     </div>
