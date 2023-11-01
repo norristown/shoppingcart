@@ -9,6 +9,7 @@ export default function CartWrapper({
       {" "}
       <h1>Cart</h1>
       <h2>Total: {totalPrice}</h2>
+      <button>Checkout</button>
       {cartItems.length === 0 ? (
         <div>Your Cart Is Empty</div>
       ) : (
