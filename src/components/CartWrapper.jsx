@@ -14,10 +14,10 @@ export default function CartWrapper({
       ) : (
         <div
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gridGap: "2rem",
+            display: "flex",
             fontFamily: "sans-serif",
+            flexDirection: "column",
+            gap: "1rem",
           }}
         >
           {cartItems.map((x) =>
@@ -27,33 +27,29 @@ export default function CartWrapper({
                 style={{
                   border: "3px solid black",
                   display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
+                  gap: "2rem",
                   alignItems: "center",
                 }}
               >
-                <div>
-                  <p>Id: {x.id}</p>
-                  <p>Title: {x.title}</p>
-                  <p>Quantity: {x.quantity}</p>
-                  <p>Price: {x.price * x.quantity}</p>
-                </div>
-
                 <img
                   src={x.image}
                   style={{
                     height: "auto",
                     width: "100px",
-                    marginBottom: "2rem",
                   }}
                   alt="product"
                 />
+                <div>
+                  <p>{x.title}</p>
+                  <p>Price: {x.price * x.quantity}</p>
+                </div>
+
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                  <div>
+                  <div style={{ display: "flex" }}>
                     <button onClick={() => handleRemoveCartItem(x.id)}>
                       -
                     </button>
-                    <span></span>
+                    <span>Quantity: {x.quantity}</span>
                     <button onClick={() => handleAddCartItem(x.id)}>+</button>
                   </div>
                 </div>

@@ -17,11 +17,6 @@ function CartPage({ cartItems, onSetCartItems, totalPrice, totalItems }) {
       )
     );
   }
-  // const totalPrice = cartItems.reduce(
-  //   (acc, curr) => acc + curr.price * curr.quantity,
-  //   0
-  // );
-  // const totalItems = cartItems.reduce((acc, curr) => acc + curr.quantity, 0);
   return (
     <div>
       <PageNav totalItems={totalItems} />
