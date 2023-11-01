@@ -5,12 +5,15 @@ export default function ProductWrapper({ cartItems, onSetCartItems }) {
   const [quantity, setQuantity] = useState(() =>
     Array.from({ length: 20 }, (_, index) => ({
       id: index + 1,
-      quantity: 0,
+      quantity: 1,
     }))
   );
 
   function handleAddToCart(id) {
     const itemToAdd = storeItems.find((item) => item.id === id);
+    const itemQuantity = quantity.find(
+      (item) => item.id === id && item
+    ).quantity;
 
     if (itemToAdd) {
       const isInCart = cartItems.find((item) => item.id === id);
@@ -21,7 +24,7 @@ export default function ProductWrapper({ cartItems, onSetCartItems }) {
             cartItem.id === id
               ? {
                   ...cartItem,
-                  quantity: cartItem.quantity + 1,
+                  quantity: cartItem.quantity + itemQuantity,
                 }
               : cartItem
           )
@@ -32,7 +35,7 @@ export default function ProductWrapper({ cartItems, onSetCartItems }) {
           {
             id: itemToAdd.id,
             title: itemToAdd.title,
-            quantity: 1,
+            quantity: itemQuantity,
             price: itemToAdd.price,
             image: itemToAdd.image,
           },
@@ -47,6 +50,22 @@ export default function ProductWrapper({ cartItems, onSetCartItems }) {
         item.id === id ? { ...item, quantity: e.target.value } : item
       )
     );
+  }
+
+  function handleIncrement(id, buttonValue) {
+    if (buttonValue === "+") {
+      setQuantity((prev) =>
+        prev.map((item) =>
+          item.id === id ? { ...item, quantity: item.quantity++ } : item
+        )
+      );
+    } else {
+      setQuantity((prev) =>
+        prev.map((item) =>
+          item.id === id ? { ...item, quantity: item.quantity-- } : item
+        )
+      );
+    }
   }
 
   useEffect(() => {
@@ -93,7 +112,15 @@ export default function ProductWrapper({ cartItems, onSetCartItems }) {
           />
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div>
-              <button>-</button>
+              <button
+                onClick={() => handleIncrement(x.id, "-")}
+                disabled={
+                  quantity.find((item) => item.id === x.id && item).quantity ===
+                  1
+                }
+              >
+                -
+              </button>
               <span>
                 <input
                   style={{ textAlign: "center" }}
@@ -104,7 +131,9 @@ export default function ProductWrapper({ cartItems, onSetCartItems }) {
                   onChange={(e) => handleChange(e, x.id)}
                 ></input>
               </span>
-              <button id={x.id}>+</button>
+              <button id={x.id} onClick={() => handleIncrement(x.id, "+")}>
+                +
+              </button>
             </div>
             <button onClick={() => handleAddToCart(x.id)} id={x.id}>
               Add To Cart
