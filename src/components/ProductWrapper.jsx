@@ -80,9 +80,12 @@ export default function ProductWrapper({ cartItems, onSetCartItems }) {
   const copy = storeItems.map((x) => x);
   const halfStoreItems = copy.slice(0, 8);
   return (
-    <div className="grid grid-cols-4 gap-10 mt-10 mx-80">
+    <div className="grid grid-cols-4 gap-10 my-10 mx-96 h-screen">
       {halfStoreItems.map((x) => (
-        <div key={x.id} className="flex flex-col justify-between">
+        <div
+          key={x.id}
+          className="flex flex-col justify-between bg-stone-100 rounded text-stone-900 shadow-xl"
+        >
           <p className="font-semibold text-center">{x.title}</p>
           <img className="mx-auto w-1/2" src={x.image} alt="product" />
           <div>
@@ -92,36 +95,38 @@ export default function ProductWrapper({ cartItems, onSetCartItems }) {
             <p className="font-semibold text-center">
               Price: ${(Math.round(x.price * 100) / 100).toFixed(2)}
             </p>
-            <div className="flex-col text-center">
-              <button
-                onClick={() => handleIncrement(x.id, "-")}
-                disabled={
-                  quantity.find((item) => item.id === x.id && item).quantity ===
-                  1
-                }
-                className="focus:outline-none text-white bg-red-600 hover:bg-red-700  font-medium rounded-lg text-sm px-2 mr-2 mb-2 "
-              >
-                -
-              </button>
-              <input
-                className="text-stone-900 w-1/12 text-center mr-2"
-                id={x.id}
-                value={
-                  quantity.find((item) => item.id === x.id && item).quantity
-                }
-                onChange={(e) => handleChange(e, x.id)}
-              ></input>
-              <button
-                className="focus:outline-none text-white bg-green-600 hover:bg-green-700  font-medium rounded-lg text-sm px-2 mr-2 mb-2 "
-                id={x.id}
-                onClick={() => handleIncrement(x.id, "+")}
-              >
-                +
-              </button>
+            <div className="flex flex-col items-center">
+              <div className="text-center">
+                <button
+                  onClick={() => handleIncrement(x.id, "-")}
+                  disabled={
+                    quantity.find((item) => item.id === x.id && item)
+                      .quantity === 1
+                  }
+                  className="focus:outline-none text-white bg-red-600 hover:bg-red-700  font-medium rounded text-sm px-2 mr-2 mb-2 "
+                >
+                  -
+                </button>
+                <input
+                  className="text-stone-900 w-1/12 text-center mr-2"
+                  id={x.id}
+                  value={
+                    quantity.find((item) => item.id === x.id && item).quantity
+                  }
+                  onChange={(e) => handleChange(e, x.id)}
+                ></input>
+                <button
+                  className="focus:outline-none text-white bg-green-600 hover:bg-green-700  font-medium rounded text-sm px-2 mr-2 mb-2 "
+                  id={x.id}
+                  onClick={() => handleIncrement(x.id, "+")}
+                >
+                  +
+                </button>
+              </div>
               <button
                 onClick={() => handleAddToCart(x.id)}
                 id={x.id}
-                className="focus:outline-none text-white bg-green-600 hover:bg-green-700  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 w-full"
+                className="focus:outline-none text-white bg-green-600 hover:bg-green-700  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 w-1/3"
               >
                 Add To Cart
               </button>

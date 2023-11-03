@@ -1,14 +1,12 @@
 import PageNav from "../components/PageNav";
 import ProductWrapper from "../components/ProductWrapper";
-
+import Footer from "../components/Footer";
 function Store({ cartItems, onSetCartItems, totalItems }) {
   return (
     <div>
       <PageNav totalItems={totalItems} />
-      <h1 className="text-9xl text-stone-100 font-bold text-center tracking-[2rem] uppercase">
-        Norristown
-      </h1>
       <ProductWrapper cartItems={cartItems} onSetCartItems={onSetCartItems} />
+      <Footer />
     </div>
   );
 }
