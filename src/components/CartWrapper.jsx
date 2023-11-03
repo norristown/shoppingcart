@@ -8,7 +8,7 @@ export default function CartWrapper({
     <div>
       {" "}
       <h1>Cart</h1>
-      <h2>Total: {totalPrice}</h2>
+      <h2>Total: {(Math.round(totalPrice * 100) / 100).toFixed(2)}</h2>
       <button>Checkout</button>
       {cartItems.length === 0 ? (
         <div>Your Cart Is Empty</div>
@@ -42,7 +42,7 @@ export default function CartWrapper({
                 />
                 <div>
                   <p>{x.title}</p>
-                  <p>Price: {x.price * x.quantity}</p>
+                  <p>Price: {(Math.round((x.price * x.quantity) * 100) / 100).toFixed(2)}</p>
                 </div>
 
                 <div style={{ display: "flex", flexDirection: "column" }}>

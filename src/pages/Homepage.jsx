@@ -4,8 +4,11 @@ function Homepage({ totalItems }) {
   return (
     <>
       <PageNav totalItems={totalItems} />
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <h1>N O R R I S T O W N</h1>
+      <div className="grid">
+        <h1 className="text-9xl text-yellow-500 font-bold text-center tracking-[2rem] uppercase">
+          Norristown
+        </h1>
+        <h4 className="text-7xl text-center">Consume</h4>
       </div>
     </>
   );

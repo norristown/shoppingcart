@@ -1,10 +1,10 @@
 import { NavLink } from "react-router-dom";
-import styles from "./PageNav.module.css";
+
 
 function PageNav({ totalItems }) {
   return (
-    <div className={styles.nav}>
-      <ul>
+    <div className="bg-yellow-500 text-stone-800 font-semibold py-3">
+      <ul className="flex justify-around text-2xl" >
         <li>
           <NavLink to="/">Home</NavLink>
         </li>

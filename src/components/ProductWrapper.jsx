@@ -47,7 +47,7 @@ export default function ProductWrapper({ cartItems, onSetCartItems }) {
   function handleChange(e, id) {
     setQuantity((prev) =>
       prev.map((item) =>
-        item.id === id ? { ...item, quantity: e.target.value } : item
+        item.id === id ? { ...item, quantity: Number(e.target.value) } : item
       )
     );
   }
@@ -78,66 +78,55 @@ export default function ProductWrapper({ cartItems, onSetCartItems }) {
   }, [cartItems]);
 
   return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(4, 1fr)",
-        gridGap: "2rem",
-        fontFamily: "sans-serif",
-      }}
-    >
+    <div className="grid grid-cols-4 gap-2 mt-10 mx-80">
       {storeItems.map((x) => (
-        <div
-          key={x.id}
-          style={{
-            border: "3px solid black",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <div>
-            <p>{x.title}</p>
-            <p>{x.description}</p>
-            <p>Price: {x.price}</p>
-            <p>
-              Rating: {x.rating.rate} ({x.rating.count})
-            </p>
+        <div key={x.id} className="flex-col">
+          <div className="text-center">
+            <p className="font-semibold">{x.title}</p>
+            {/* <p>{x.description}</p> */}
+            {/* <p>Price: {x.price}</p> */}
           </div>
-          <img
-            src={x.image}
-            style={{ height: "auto", width: "100px", marginBottom: "2rem" }}
-            alt="product"
-          />
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <div>
+          <img className="my-auto mx-auto w-1/2" src={x.image} alt="product" />
+
+          <p className="text-center">
+            Rating: {x.rating.rate}/5 ({x.rating.count} Reviews)
+          </p>
+          <p className="font-semibold text-center">Price: ${x.price}</p>
+          <div className="">
+            <div className="text-center mt-2">
               <button
                 onClick={() => handleIncrement(x.id, "-")}
                 disabled={
                   quantity.find((item) => item.id === x.id && item).quantity ===
                   1
                 }
+                className="focus:outline-none text-white bg-yellow-500 hover:bg-yellow-600  font-medium rounded-lg text-sm px-2 mr-2 mb-2 "
               >
                 -
               </button>
-              <span>
-                <input
-                  style={{ textAlign: "center" }}
-                  id={x.id}
-                  value={
-                    quantity.find((item) => item.id === x.id && item).quantity
-                  }
-                  onChange={(e) => handleChange(e, x.id)}
-                ></input>
-              </span>
-              <button id={x.id} onClick={() => handleIncrement(x.id, "+")}>
+              <input
+                className="text-stone-900 w-1/12 text-center mr-2"
+                id={x.id}
+                value={
+                  quantity.find((item) => item.id === x.id && item).quantity
+                }
+                onChange={(e) => handleChange(e, x.id)}
+              ></input>
+              <button
+                className="focus:outline-none text-white bg-yellow-500 hover:bg-yellow-600  font-medium rounded-lg text-sm px-2 mr-2 mb-2 "
+                id={x.id}
+                onClick={() => handleIncrement(x.id, "+")}
+              >
                 +
               </button>
+              <button
+                onClick={() => handleAddToCart(x.id)}
+                id={x.id}
+                className="focus:outline-none text-white bg-yellow-500 hover:bg-yellow-600  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 "
+              >
+                Add To Cart
+              </button>
             </div>
-            <button onClick={() => handleAddToCart(x.id)} id={x.id}>
-              Add To Cart
-            </button>
           </div>
         </div>
       ))}
