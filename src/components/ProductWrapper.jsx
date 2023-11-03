@@ -80,19 +80,14 @@ export default function ProductWrapper({ cartItems, onSetCartItems }) {
   return (
     <div className="grid grid-cols-4 gap-10 mt-10 mx-80">
       {storeItems.map((x) => (
-        <div key={x.id} className="flex-col">
-          <div className="text-center">
-            <p className="font-semibold">{x.title}</p>
-            {/* <p>{x.description}</p> */}
-            {/* <p>Price: {x.price}</p> */}
-          </div>
+        <div key={x.id} className="flex flex-col justify-between">
+          <p className="font-semibold text-center">{x.title}</p>
           <img className="mx-auto w-1/2" src={x.image} alt="product" />
-          <div className="container">
+          <div>
             <p className="text-center">
               Rating: {x.rating.rate}/5 ({x.rating.count} Reviews)
             </p>
             <p className="font-semibold text-center">Price: ${x.price}</p>
-
             <div className="flex-col text-center">
               <button
                 onClick={() => handleIncrement(x.id, "-")}
