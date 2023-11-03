@@ -77,9 +77,11 @@ export default function ProductWrapper({ cartItems, onSetCartItems }) {
     getProducts();
   }, [cartItems]);
 
+  const copy = storeItems.map((x) => x);
+  const halfStoreItems = copy.slice(0, 8);
   return (
     <div className="grid grid-cols-4 gap-10 mt-10 mx-80">
-      {storeItems.map((x) => (
+      {halfStoreItems.map((x) => (
         <div key={x.id} className="flex flex-col justify-between">
           <p className="font-semibold text-center">{x.title}</p>
           <img className="mx-auto w-1/2" src={x.image} alt="product" />
@@ -87,7 +89,9 @@ export default function ProductWrapper({ cartItems, onSetCartItems }) {
             <p className="text-center">
               Rating: {x.rating.rate}/5 ({x.rating.count} Reviews)
             </p>
-            <p className="font-semibold text-center">Price: ${x.price}</p>
+            <p className="font-semibold text-center">
+              Price: ${(Math.round(x.price * 100) / 100).toFixed(2)}
+            </p>
             <div className="flex-col text-center">
               <button
                 onClick={() => handleIncrement(x.id, "-")}
