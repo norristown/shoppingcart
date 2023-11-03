@@ -78,7 +78,7 @@ export default function ProductWrapper({ cartItems, onSetCartItems }) {
   }, [cartItems]);
 
   return (
-    <div className="grid grid-cols-4 gap-2 mt-10 mx-80">
+    <div className="grid grid-cols-4 gap-10 mt-10 mx-80">
       {storeItems.map((x) => (
         <div key={x.id} className="flex-col">
           <div className="text-center">
@@ -86,21 +86,21 @@ export default function ProductWrapper({ cartItems, onSetCartItems }) {
             {/* <p>{x.description}</p> */}
             {/* <p>Price: {x.price}</p> */}
           </div>
-          <img className="my-auto mx-auto w-1/2" src={x.image} alt="product" />
+          <img className="mx-auto w-1/2" src={x.image} alt="product" />
+          <div className="container">
+            <p className="text-center">
+              Rating: {x.rating.rate}/5 ({x.rating.count} Reviews)
+            </p>
+            <p className="font-semibold text-center">Price: ${x.price}</p>
 
-          <p className="text-center">
-            Rating: {x.rating.rate}/5 ({x.rating.count} Reviews)
-          </p>
-          <p className="font-semibold text-center">Price: ${x.price}</p>
-          <div className="">
-            <div className="text-center mt-2">
+            <div className="flex-col text-center">
               <button
                 onClick={() => handleIncrement(x.id, "-")}
                 disabled={
                   quantity.find((item) => item.id === x.id && item).quantity ===
                   1
                 }
-                className="focus:outline-none text-white bg-yellow-500 hover:bg-yellow-600  font-medium rounded-lg text-sm px-2 mr-2 mb-2 "
+                className="focus:outline-none text-white bg-red-600 hover:bg-red-700  font-medium rounded-lg text-sm px-2 mr-2 mb-2 "
               >
                 -
               </button>
@@ -113,7 +113,7 @@ export default function ProductWrapper({ cartItems, onSetCartItems }) {
                 onChange={(e) => handleChange(e, x.id)}
               ></input>
               <button
-                className="focus:outline-none text-white bg-yellow-500 hover:bg-yellow-600  font-medium rounded-lg text-sm px-2 mr-2 mb-2 "
+                className="focus:outline-none text-white bg-green-600 hover:bg-green-700  font-medium rounded-lg text-sm px-2 mr-2 mb-2 "
                 id={x.id}
                 onClick={() => handleIncrement(x.id, "+")}
               >
@@ -122,7 +122,7 @@ export default function ProductWrapper({ cartItems, onSetCartItems }) {
               <button
                 onClick={() => handleAddToCart(x.id)}
                 id={x.id}
-                className="focus:outline-none text-white bg-yellow-500 hover:bg-yellow-600  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 "
+                className="focus:outline-none text-white bg-green-600 hover:bg-green-700  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 w-full"
               >
                 Add To Cart
               </button>
