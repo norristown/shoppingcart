@@ -21,11 +21,14 @@ export default function CartWrapper({
       {cartItems.length === 0 ? (
         <div>Your Cart Is Empty</div>
       ) : (
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-2">
           {cartItems.map((x) =>
             x.quantity === 0 ? null : (
-              <div key={x.id} className="rounded flex items-center gap-10">
-                <img className="h-80 w-auto" src={x.image} alt="product" />
+              <div
+                key={x.id}
+                className="rounded flex items-center gap-12 bg-stone-100 shadow-lg py-5 px-2 w-2/3"
+              >
+                <img className="w-40" src={x.image} alt="product" />
 
                 <div style={{ display: "flex", flexDirection: "column" }}>
                   <div style={{ display: "flex" }}>
